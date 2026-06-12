@@ -1,4 +1,3 @@
-# models/student.py
 from dataclasses import dataclass
 
 @dataclass
