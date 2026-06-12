@@ -1,4 +1,3 @@
-# exports/excel_exporter.py
 import pandas as pd
 from tkinter import filedialog, messagebox
 import sys
@@ -24,7 +23,6 @@ class ExcelExporter:
             return
 
         try:
-            # Fetch Marks
             query = """
                 SELECT s.semester_number, s.academic_year, sub.subject_code, sub.subject_name, 
                        sub.credits, m.internal_marks, m.external_marks, m.total_marks, m.grade, m.grade_points
@@ -38,20 +36,16 @@ class ExcelExporter:
                 cursor.execute(query, (student_id,))
                 marks_data = cursor.fetchall()
                 
-            # Fetch SGPA Data
             semesters_data = db_manager.get_all_semesters_with_sgpa(student_id)
             
-            # Calculate CGPA
             sgpas = [float(sem['sgpa']) for sem in semesters_data if sem['sgpa'] > 0]
             cgpa = calculate_cgpa(sgpas)
 
-            # Create DataFrames
             df_marks = pd.DataFrame(marks_data)
             if df_marks.empty:
                 messagebox.showwarning("No Data", "No marks found for this student.")
                 return
                 
-            # Rename columns nicely
             df_marks.columns = ['Semester', 'Academic Year', 'Sub Code', 'Sub Name', 
                                 'Credits', 'Internal', 'External', 'Total', 'Grade', 'Points']
             
@@ -61,7 +55,6 @@ class ExcelExporter:
             
             df_cgpa = pd.DataFrame([{'Student': student_name_str, 'Overall CGPA': cgpa}])
 
-            # Write to Excel
             with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
                 df_marks.to_excel(writer, sheet_name='All Marks', index=False)
                 df_summary.to_excel(writer, sheet_name='SGPA Summary', index=False)
