@@ -1,5 +1,3 @@
-# utils/gpa_calculator.py
-
 def marks_to_grade(total_marks: float) -> str:
     """
     Converts total marks into a grade string.
@@ -137,45 +135,3 @@ def get_performance_remark(cgpa: float) -> str:
         return 'Average'
     else:
         return 'Needs Improvement'
-
-
-# ==========================================
-# UNIT TEST EXAMPLES
-# ==========================================
-# """
-# if __name__ == "__main__":
-#     # 1. Test marks_to_grade
-#     assert marks_to_grade(95) == 'O'
-#     assert marks_to_grade(82) == 'A+'
-#     assert marks_to_grade(35) == 'F'
-#     print("marks_to_grade tests passed!")
-# 
-#     # 2. Test grade_to_points
-#     assert grade_to_points('A+') == 9.0
-#     assert grade_to_points('F') == 0.0
-#     assert grade_to_points('INVALID') == 0.0
-#     print("grade_to_points tests passed!")
-# 
-#     # 3. Test calculate_sgpa
-#     subjects = [
-#         {'credits': 4, 'grade_points': 9.0}, # 36
-#         {'credits': 3, 'grade_points': 8.0}, # 24
-#         {'credits': 2, 'grade_points': 10.0} # 20
-#     ]
-#     # Total credits = 9. Total points = 80. SGPA = 80 / 9 = 8.89
-#     assert calculate_sgpa(subjects) == 8.89
-#     assert calculate_sgpa([]) == 0.0
-#     print("calculate_sgpa tests passed!")
-# 
-#     # 4. Test calculate_cgpa
-#     sgpas = [8.5, 9.0, 8.8] # sum = 26.3. cgpa = 26.3 / 3 = 8.77
-#     assert calculate_cgpa(sgpas) == 8.77
-#     assert calculate_cgpa([]) == 0.0
-#     print("calculate_cgpa tests passed!")
-# 
-#     # 5. Test get_performance_remark
-#     assert get_performance_remark(9.2) == 'Outstanding'
-#     assert get_performance_remark(7.5) == 'Very Good'
-#     assert get_performance_remark(4.5) == 'Needs Improvement'
-#     print("get_performance_remark tests passed!")
-# """
