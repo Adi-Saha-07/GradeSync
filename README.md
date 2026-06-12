@@ -1,4 +1,4 @@
-# 🎓 GradeSync - Advanced CGPA & Marks Tracker
+# 🎓 GradeSync - CGPA & Marks Tracker
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Tkinter](https://img.shields.io/badge/GUI-Tkinter-orange.svg)
