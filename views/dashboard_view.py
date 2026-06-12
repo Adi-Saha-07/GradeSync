@@ -1,4 +1,3 @@
-# views/dashboard_view.py
 import tkinter as tk
 from tkinter import ttk, messagebox
 import matplotlib
@@ -24,7 +23,7 @@ class DashboardView(ttk.Frame):
         self.refresh_data()
 
     def _create_widgets(self):
-        # Top section: CGPA Label
+
         top_frame = ttk.Frame(self)
         top_frame.pack(fill=tk.X, pady=(0, 10))
         
@@ -37,11 +36,9 @@ class DashboardView(ttk.Frame):
         self.refresh_btn = ttk.Button(top_frame, text="Refresh Data", command=self.refresh_data)
         self.refresh_btn.pack(side=tk.RIGHT)
 
-        # Middle section: Two columns (Table and Chart)
         content_frame = ttk.PanedWindow(self, orient=tk.HORIZONTAL)
         content_frame.pack(fill=tk.BOTH, expand=True)
 
-        # Left Column: Table
         table_frame = ttk.Frame(content_frame)
         content_frame.add(table_frame, weight=1)
 
@@ -71,7 +68,6 @@ class DashboardView(ttk.Frame):
 
         self.tree.bind('<Delete>', self._delete_selected)
 
-        # Right Column: Chart
         chart_frame = ttk.Frame(content_frame)
         content_frame.add(chart_frame, weight=1)
         
@@ -80,8 +76,7 @@ class DashboardView(ttk.Frame):
         
         self.canvas = FigureCanvasTkAgg(self.fig, master=chart_frame)
         self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
-        
-        # Bottom Frame for Actions
+
         bottom_frame = ttk.Frame(self)
         bottom_frame.pack(fill=tk.X, pady=10)
         
@@ -89,7 +84,7 @@ class DashboardView(ttk.Frame):
         self.del_mark_btn.pack(side=tk.LEFT)
 
     def refresh_data(self):
-        # Always clear the treeview first
+        
         for item in self.tree.get_children():
             self.tree.delete(item)
             
@@ -103,7 +98,6 @@ class DashboardView(ttk.Frame):
             self.canvas.draw()
             return
             
-        # 1. Update Table
         query = """
             SELECT m.id, s.semester_number, sub.subject_name, sub.credits, m.total_marks, m.grade, m.grade_points
             FROM marks m 
@@ -122,7 +116,6 @@ class DashboardView(ttk.Frame):
                 m['credits'], m['total_marks'], m['grade'], m['grade_points']
             ))
 
-        # 2. Update CGPA and Chart
         semesters_data = self.db_manager.get_all_semesters_with_sgpa(self.student_id)
         
         sgpas = []
@@ -135,13 +128,12 @@ class DashboardView(ttk.Frame):
         cgpa = calculate_cgpa(sgpas)
         remark = get_performance_remark(cgpa)
         
-        # Dynamic Coloring based on performance
         if cgpa >= 7.0:
-            color_hex = "#2ECC71" # Green
+            color_hex = "#2ECC71"
         elif cgpa >= 5.0:
-            color_hex = "#F1C40F" # Yellow/Orange
+            color_hex = "#F1C40F"
         else:
-            color_hex = "#E74C3C" # Red
+            color_hex = "#E74C3C"
 
         self.cgpa_label.config(text=f"Overall CGPA: {cgpa:.2f}", foreground=color_hex)
         if cgpa > 0:
@@ -149,7 +141,6 @@ class DashboardView(ttk.Frame):
         else:
             self.remark_label.config(text="")
             
-        # Update Chart with Professional Dark Theme styling
         self.ax.clear()
         self.fig.patch.set_facecolor('#1c1c1c')
         self.ax.set_facecolor('#1c1c1c')
@@ -158,8 +149,7 @@ class DashboardView(ttk.Frame):
             self.ax.text(0.5, 0.5, 'No data to display', horizontalalignment='center', verticalalignment='center', transform=self.ax.transAxes, color='#888888', fontdict={'size': 12, 'style': 'italic'})
         else:
             self.ax.plot(sem_numbers, sgpas, marker='o', linestyle='-', color=color_hex, linewidth=2.5, markersize=8, markerfacecolor='white')
-            
-            # Add data labels
+
             for x, y in zip(sem_numbers, sgpas):
                 self.ax.annotate(f'{y:.2f}', xy=(x, y), xytext=(0, 5), textcoords='offset points', ha='center', va='bottom', fontsize=9, color='white', fontweight='bold')
                 
