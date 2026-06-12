@@ -1,4 +1,3 @@
-# views/main_window.py
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 import sys
@@ -15,8 +14,7 @@ class MainWindow(tk.Tk):
         self.db_manager = db_manager
         
         self.title("GradeSync")
-        
-        # Set App Icon
+
         try:
             icon_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "icon.ico")
             if os.path.exists(icon_path):
@@ -24,7 +22,6 @@ class MainWindow(tk.Tk):
         except Exception as e:
             print("Failed to load icon:", e)
         
-        # Center the main window and make it slightly larger
         window_width = 1000
         window_height = 750
         screen_width = self.winfo_screenwidth()
@@ -33,8 +30,7 @@ class MainWindow(tk.Tk):
         center_y = int(screen_height/2 - window_height / 2)
         self.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
         self.minsize(900, 650)
-        
-        # Apply modern sv_ttk dark theme for a professional look
+
         try:
             import sv_ttk
             sv_ttk.set_theme("dark")
@@ -48,7 +44,7 @@ class MainWindow(tk.Tk):
         self.refresh_students()
         
     def _create_widgets(self):
-        # Top Toolbar for Student Selection and Export
+
         toolbar = ttk.Frame(self, padding="10")
         toolbar.pack(side=tk.TOP, fill=tk.X)
         
@@ -68,15 +64,12 @@ class MainWindow(tk.Tk):
         export_btn = ttk.Button(toolbar, text="Export Student Data", command=self.export_data)
         export_btn.pack(side=tk.RIGHT)
 
-        # Notebook for tabs
         self.notebook = ttk.Notebook(self)
         self.notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-        # Dashboard Tab
         self.dashboard_tab = DashboardView(self.notebook, self.db_manager)
         self.notebook.add(self.dashboard_tab, text="Dashboard")
 
-        # Add Marks Tab
         self.add_marks_tab = AddMarksView(
             self.notebook, 
             self.db_manager, 
@@ -97,7 +90,6 @@ class MainWindow(tk.Tk):
                 self.student_combo.current(0)
                 self._on_student_selected(None)
             else:
-                # Find index of current
                 found = False
                 for i, s in enumerate(self.students_list):
                     if s['id'] == self.current_student_id:
@@ -124,8 +116,7 @@ class MainWindow(tk.Tk):
     def _add_student_dialog(self):
         dialog = tk.Toplevel(self)
         dialog.title("Add New Student")
-        
-        # Make larger and center
+
         w, h = 400, 350
         dialog.update_idletasks()
         x = int(dialog.winfo_screenwidth()/2 - w/2)
