@@ -1,4 +1,3 @@
-# views/add_marks_view.py
 import tkinter as tk
 from tkinter import ttk, messagebox
 import sys
@@ -24,11 +23,10 @@ class AddMarksView(ttk.Frame):
         self.refresh_semesters()
 
     def _create_widgets(self):
-        # Title
+        
         title_label = ttk.Label(self, text="Add Marks for Student", font=("Helvetica", 16, "bold"))
         title_label.grid(row=0, column=0, columnspan=3, pady=(0, 20))
 
-        # --- Semester ---
         ttk.Label(self, text="Semester:").grid(row=1, column=0, sticky=tk.W, pady=5)
         self.semester_var = tk.StringVar()
         self.semester_combo = ttk.Combobox(self, textvariable=self.semester_var, state="readonly", width=25)
@@ -36,8 +34,7 @@ class AddMarksView(ttk.Frame):
         self.semester_combo.bind("<<ComboboxSelected>>", self._on_semester_selected)
         
         ttk.Button(self, text="+ New Sem", command=self._add_semester_dialog).grid(row=1, column=2, padx=10, pady=5)
-
-        # --- Subject ---
+=
         ttk.Label(self, text="Subject:").grid(row=2, column=0, sticky=tk.W, pady=5)
         self.subject_var = tk.StringVar()
         self.subject_combo = ttk.Combobox(self, textvariable=self.subject_var, state="readonly", width=25)
@@ -50,7 +47,6 @@ class AddMarksView(ttk.Frame):
         del_subj_btn = tk.Button(subj_btn_frame, text="Delete Subj", command=self.delete_subject, bg="#E74C3C", fg="white", activebackground="#C0392B", activeforeground="white", relief="flat", font=("Helvetica", 9, "bold"), cursor="hand2", padx=8, pady=2)
         del_subj_btn.pack(side=tk.LEFT)
 
-        # --- Marks ---
         ttk.Label(self, text="Internal Marks:").grid(row=3, column=0, sticky=tk.W, pady=5)
         self.internal_var = tk.StringVar()
         self.internal_entry = ttk.Entry(self, textvariable=self.internal_var, width=28)
@@ -61,11 +57,9 @@ class AddMarksView(ttk.Frame):
         self.external_entry = ttk.Entry(self, textvariable=self.external_var, width=28)
         self.external_entry.grid(row=4, column=1, sticky=tk.EW, pady=5)
         
-        # Bind Enter key on entry fields to save_marks
         self.internal_entry.bind('<Return>', self.save_marks)
         self.external_entry.bind('<Return>', self.save_marks)
 
-        # --- Action Buttons ---
         btn_frame = ttk.Frame(self)
         btn_frame.grid(row=5, column=0, columnspan=3, pady=20)
         
@@ -254,7 +248,6 @@ class AddMarksView(ttk.Frame):
             
         subject_id = self.subjects_list[subj_idx]['id']
         
-        # We need a custom query to delete marks for this subject
         confirm = messagebox.askyesno("Confirm Delete", "Are you sure you want to delete ALL marks for this specific subject?")
         if confirm:
             try:
