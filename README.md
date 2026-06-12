@@ -58,7 +58,7 @@ python main.py
 
 ## 📸 Screenshots
 ### Dashboard
-![Dashboard](screenshots/Main.png)
+![Dashboard](screenshots/dashboard.png)
 
 ## 🤝 Contributing
 Contributions, issues, and feature requests are welcome!
