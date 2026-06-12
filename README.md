@@ -60,12 +60,6 @@ python main.py
 ### Dashboard
 ![Dashboard](screenshots/Main.png)
 
-### Add Marks
-![Add Marks](screenshots/StudentData.png)
-
-### Analytics
-![Analytics](screenshots/AddMarks.png)
-
 ## 🤝 Contributing
 Contributions, issues, and feature requests are welcome!
 
