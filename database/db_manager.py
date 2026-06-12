@@ -1,4 +1,3 @@
-# database/db_manager.py
 import mysql.connector
 from mysql.connector import Error
 from contextlib import contextmanager
@@ -96,9 +95,6 @@ class DBManager:
         except Error as e:
             print(f"Error initializing tables: {e}")
 
-    # ==============================
-    # STUDENTS CRUD
-    # ==============================
     def add_student(self, name, roll_number, branch, year_of_joining):
         query = "INSERT INTO students (name, roll_number, branch, year_of_joining) VALUES (%s, %s, %s, %s)"
         try:
@@ -146,9 +142,7 @@ class DBManager:
             print(f"Error deleting student: {e}")
             return False
 
-    # ==============================
-    # SEMESTERS CRUD
-    # ==============================
+
     def add_semester(self, student_id, semester_number, academic_year):
         query = "INSERT INTO semesters (student_id, semester_number, academic_year) VALUES (%s, %s, %s)"
         try:
@@ -192,9 +186,6 @@ class DBManager:
             print(f"Error deleting semester: {e}")
             return False
 
-    # ==============================
-    # SUBJECTS CRUD
-    # ==============================
     def add_subject(self, semester_id, subject_name, subject_code, credits):
         query = "INSERT INTO subjects (semester_id, subject_name, subject_code, credits) VALUES (%s, %s, %s, %s)"
         try:
@@ -238,9 +229,6 @@ class DBManager:
             print(f"Error deleting subject: {e}")
             return False
 
-    # ==============================
-    # MARKS CRUD
-    # ==============================
     def add_mark(self, subject_id, internal_marks, external_marks, total_marks, grade, grade_points):
         query = """
             INSERT INTO marks (subject_id, internal_marks, external_marks, total_marks, grade, grade_points) 
@@ -291,9 +279,6 @@ class DBManager:
             print(f"Error deleting mark: {e}")
             return False
 
-    # ==============================
-    # ADVANCED QUERIES
-    # ==============================
     def get_all_semesters_with_sgpa(self, student_id):
         """
         Calculates and returns SGPA for all semesters of a specific student.
