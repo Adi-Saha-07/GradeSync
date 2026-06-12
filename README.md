@@ -57,7 +57,14 @@ python main.py
 - **Exports**: `openpyxl`
 
 ## 📸 Screenshots
-*(Add screenshots of your Dashboard and Add Marks views here!)*
+### Dashboard
+![Dashboard](screenshots/Main.png)
+
+### Add Marks
+![Add Marks](screenshots/StudentData.png)
+
+### Analytics
+![Analytics](screenshots/AddMarks.png)
 
 ## 🤝 Contributing
 Contributions, issues, and feature requests are welcome!
