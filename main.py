@@ -1,4 +1,3 @@
-# main.py
 import tkinter as tk
 from tkinter import messagebox
 import sys
@@ -11,9 +10,8 @@ def main():
     try:
         db_manager = DBManager()
     except Exception as e:
-        # If DB fails to initialize, show a basic tk window with the error
         root = tk.Tk()
-        root.withdraw() # hide the main window
+        root.withdraw()
         messagebox.showerror(
             "Database Error", 
             f"Failed to connect or initialize the database.\n"
@@ -24,7 +22,6 @@ def main():
 
     app = MainWindow(db_manager)
     
-    # Handle window close to clean up DB connection
     def on_closing():
         db_manager.close()
         app.destroy()
